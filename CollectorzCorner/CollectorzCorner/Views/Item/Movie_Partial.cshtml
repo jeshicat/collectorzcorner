@@ -1,0 +1,51 @@
+﻿@model CollectorzCorner.Movie
+
+    <div class="control-group">
+        <label class="control-label">Director:</label>
+        <div class="controls cLabel">
+             @Html.DisplayFor(model => model.Director)
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Writer:</label>
+        <div class="controls cLabel">
+            @Html.DisplayFor(model => model.Writer)
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Producer:</label>
+        <div class="controls cLabel">
+            @Html.DisplayFor(model => model.Producer)
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Format:</label>
+        <div class="controls cLabel">
+            @Html.DisplayFor(model => model.Format)
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Content Rating:</label>
+        <div class="controls cLabel">
+            <div id="rating"></div>
+            <input type="hidden" id="hdnRating" value="@Model.ContentRatingID" />
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ratingID = $("#hdnRating").val();
+           
+            $.ajax({
+                url: "/Item/GetContentRating",
+                data: { RatingID: ratingID },
+                success: function (result) {
+                    $("#rating").html(result);
+                }
+            });
+        });
+    </script>

@@ -1,0 +1,27 @@
+﻿<div class="left-about">
+    <div class="span3 well" style="background-color:#918599;color:black;height:200px">
+        <h3>Step 1:</h3>
+        <h5>@Html.ActionLink("Create a Collection", "Create", "Collection", new { }, new { })</h5>
+        You can create as many collections as you want. There are currently 4 types of collections: Book, Comic Book, Movie and Video Game.
+    </div>
+    <div class="span3 well" style="float:left;background-color:#afb0bd;color:#754c79;height:200px">
+        <h3>Step 2:</h3>
+        <h5>@Html.ActionLink("Add Items to Your Collection", "Index", "Search", new { }, new { })</h5>
+        To add an item to your collection you have to go to the search page and start finding your collection items! 
+    </div>
+    <div class="span3 well" style="float:left;background-color:#e0e7ef;color:#754c79;height:200px">
+        <h3>Step 3:</h3>
+        <h5>@Html.ActionLink("Contribute to the Community", "AddItem", "Search", new { }, new { })</h5>
+        If you cannot find what you are looking for you can always add an item to the database.
+    </div>
+</div>
+<script type="text/javascript">    //Needed for twitter button
+    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } } (document, "script", "twitter-wjs");</script>
+<div class="right-img well span3" style="margin-top:-50px;"> 
+    <!-- Twitter button -->
+    <a href="https://twitter.com/collectorzcornr" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow Collectorz Corner</a>
+    <!-- Facebook button --> 
+    <iframe src="https://www.facebook.com/plugins/like.php?href=www.collectorzcorner.com"
+        scrolling="no" frameborder="0"
+        style="border:none; height:80px"></iframe>    
+</div>

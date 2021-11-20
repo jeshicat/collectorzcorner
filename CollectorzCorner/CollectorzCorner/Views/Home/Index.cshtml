@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Collectorz Corner";
+}
+<h2>Welcome to Collectorz Corner!</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.Partial("_LoggedInUser")
+}
+else
+{
+    @Html.Partial("_NonLoggedInUser");
+}

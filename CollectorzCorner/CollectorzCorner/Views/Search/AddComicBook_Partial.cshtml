@@ -1,0 +1,46 @@
+﻿@model CollectorzCorner.Models.AddItemToDatabaseModel
+           
+@if (this.ViewContext.FormContext == null)
+{
+    this.ViewContext.FormContext = new FormContext();
+}
+
+<div class="control-group">
+    <label class="control-label">Writer: *</label>
+    <div class="controls">
+        @Html.EditorFor(model => model.comicModel.Writer)
+        @Html.ValidationMessageFor(model => model.comicModel.Writer)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Editor: </label>
+    <div class="controls">
+        @Html.EditorFor(model => model.comicModel.Editor)
+        @Html.ValidationMessageFor(model => model.comicModel.Editor)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Artist: *</label>
+    <div class="controls">
+        @Html.EditorFor(model => model.comicModel.Artist)
+        @Html.ValidationMessageFor(model => model.comicModel.Artist)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Colorist:</label>
+    <div class="controls">
+        @Html.EditorFor(model => model.comicModel.Colorist)
+        @Html.ValidationMessageFor(model => model.comicModel.Colorist)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Cover Artist:</label>
+    <div class="controls">
+        @Html.EditorFor(model => model.comicModel.CoverArtist)
+        @Html.ValidationMessageFor(model => model.comicModel.CoverArtist)
+    </div>
+</div>

@@ -1,0 +1,46 @@
+﻿@model CollectorzCorner.Game
+
+<div class="control-group">
+    <label class="control-label">Developer:</label>
+    <div class="controls cLabel">
+        @Html.DisplayFor(model => model.Developer)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Content Rating:</label>
+    <div class="controls cLabel">
+        <div id="rating"></div>
+        <input type="hidden" id="hdnRating" value="@Model.ContentRatingID" />
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Platform:</label>
+    <div class="controls cLabel">
+        <div id="platform"></div>
+        <input type="hidden" id="hdnPlatform" value="@Model.PlatformID" />
+    </div>
+</div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var platformID = $("#hdnPlatform").val();
+            var ratingID = $("#hdnRating").val();
+            $.ajax({
+                url: "/Item/GetPlatform",
+                data: { PlatformID: platformID },
+                success: function (result) {
+                    $("#platform").html(result);
+                }
+            });
+
+            $.ajax({
+                url: "/Item/GetContentRating",
+                data: { RatingID: ratingID },
+                success: function (result) {
+                    $("#rating").html(result);
+                }
+            });
+        });
+    </script>

@@ -1,0 +1,34 @@
+﻿@model CollectorzCorner.Models.LogOnModel
+@if (Request.IsAuthenticated)
+{
+   
+    <text>
+    <br /><br />
+    <span style="padding-right:5px">Welcome <strong>@User.Identity.Name</strong>!</span>
+     @Html.ActionLink("Log Off", "LogOff", "Account", null, new { @class = "btn btn-warning", style = "text-decoration:none" }) </text>
+}
+else
+{
+    <text>
+    <form action="/Account/LogOn" method="post" class="form-horizontal">
+        <div class="control-group">
+            <div class="controls">
+                @Html.TextBoxFor(m => m.UserName, new { placeholder = "Username" })
+                <input tabindex="1" type="button" value="Register" class="btn btn-info" onclick="document.location='@Url.Action("Register", "Account")'" />
+            </div>
+            <div class="controls" style="padding-top:5px">
+                @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+                <input tabindex="2" class="btn btn-primary"  type="submit" value=" Log On " />
+            </div>
+        </div>
+        
+    </form>
+    @*
+    @{ 
+        string facebookLoginUrl = Url.RouteUrl(new { controller = "Authentication", action = "FacebookLogin" });
+    }
+    <a href="@facebookLoginUrl">Log in with Facebook</a>
+    *@
+
+    </text>
+}

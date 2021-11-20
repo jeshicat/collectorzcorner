@@ -1,0 +1,34 @@
+﻿@model CollectorzCorner.Models.AddItemToDatabaseModel
+           
+@if (this.ViewContext.FormContext == null)
+{
+    this.ViewContext.FormContext = new FormContext();
+}
+
+<div class="control-group">
+    <label class="control-label">Developer: *</label>
+    <div class="controls">
+        @Html.EditorFor(model => model.gameModel.Developer)
+        @Html.ValidationMessageFor(model => model.gameModel.Developer)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Content Rating:</label>
+    <div class="controls">
+        <select id="GameRatingList" class="ratingList"></select>
+        @Html.ValidationMessageFor(model => model.gameModel.ContentRatingID)
+                
+        <input type="hidden" id="gameModel_ContentRatingID" name="gameModel.ContentRatingID"/>
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Platform: *</label>
+    <div class="controls">
+        <select id="PlatformList"></select>
+        @Html.ValidationMessageFor(model => model.gameModel.PlatformID)
+                
+        <input type="hidden" id="gameModel_PlatformID" name="gameModel.PlatformID"/>
+    </div>
+</div>

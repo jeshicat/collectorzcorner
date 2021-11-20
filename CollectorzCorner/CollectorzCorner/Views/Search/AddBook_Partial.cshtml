@@ -1,0 +1,69 @@
+﻿@model CollectorzCorner.Models.AddItemToDatabaseModel
+
+@if (this.ViewContext.FormContext == null)
+{
+    this.ViewContext.FormContext = new FormContext();
+}
+
+<div class="control-group">
+    <label class="control-label">Author: *</label>
+    <div class="controls">
+        @Html.EditorFor(model => model.bookModel.Author)
+        @Html.ValidationMessageFor(model => model.bookModel.Author)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Editor:</label>
+    <div class="controls">
+        @Html.EditorFor(model => model.bookModel.Editor)
+        @Html.ValidationMessageFor(model => model.bookModel.Editor)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Illustrator:</label>
+    <div class="controls">
+        @Html.EditorFor(model => model.bookModel.Illustrator)
+        @Html.ValidationMessageFor(model => model.bookModel.Illustrator)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Plot:</label>
+    <div class="controls">
+        @Html.TextAreaFor(model => model.bookModel.Plot)
+        @Html.ValidationMessageFor(model => model.bookModel.Plot)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Number of Pages:</label>
+    <div class="controls">
+        <input type="text" name="bookModel.NoOfPages" id="bookModel_NoOfPages" />
+        @Html.ValidationMessageFor(model => model.bookModel.NoOfPages)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Reading Level:</label>
+    <div class="controls">
+        @Html.EditorFor(model => model.bookModel.ReadLevel)
+        @Html.ValidationMessageFor(model => model.bookModel.ReadLevel)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">ISBN:</label>
+    <div class="controls">
+        @Html.EditorFor(model => model.bookModel.ISBN)
+        @Html.ValidationMessageFor(model => model.bookModel.ISBN)
+    </div>
+</div>
+
+<div class="control-group">
+    <div class="controls checkbox">
+        <label>@Html.EditorFor(model => model.bookModel.IsEBook) Yes, this is an E-Book</label>
+        @Html.ValidationMessageFor(model => model.bookModel.IsEBook)
+    </div>
+</div>

@@ -1,0 +1,174 @@
+﻿@model CollectorzCorner.Models.CollectionModel
+
+@{
+    ViewBag.Title = "Collectorz Corner";
+}
+
+<h2 class="heading">My Collections</h2>
+@Html.ActionLink("Create Collection", "Create", "Collection", new { }, new { @class = "btn btn-primary", style = "color:white;text-decoration:none;" })
+<br /><br />
+<span style="float:right">Views: Normal | <a href="/Collection/Icon">Icon</a></span>
+<br /><br />
+<table class="table table-hover table-striped">
+<tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Public</th>
+    <th>Complete</th>
+    <th></th>
+</tr>
+@foreach (var collection in Model.GetCollections())
+{
+    var titleStr = "This collection has " + Html.Action("GetCollectionItemCount", "Collection", new { CollectionID = collection.ID }) + " items";
+    <tr id="@collection.ID">
+        <td>@Html.ActionLink(collection.Name, "Items", new { id = collection.ID }, new { @id="collection" + @collection.ID, style = "text-decoration:none;", @class = "ttip", title = titleStr })</td>
+        <td>
+            @Html.Action("GetCollectionTypeNameByID", "Collection", new{TypeID = collection.TypeID})
+        </td>
+        <td>@collection.Description</td>
+        <td>
+            @if(collection.IsPublic){
+                @:Yes
+            }
+            else{
+                @:No
+            }
+        </td>
+        <td>
+            @if(collection.IsComplete){
+                @:Yes
+            }
+            else{
+                @:No
+            }
+        </td>
+        <td>
+            <a href="" onclick="EditModal(@collection.ID,'@collection.TypeID');return false;" class="btn btn-warning btn-mini" style="color:White;text-decoration:none">Edit</a>
+            @Html.ActionLink("Delete", "RemoveCollection", new { CollectionID = collection.ID }, new { @class = "btn btn-danger btn-mini",style="color:white;text-decoration:none" })
+        </td>
+    </tr>
+}
+</table>
+
+<div id="myModal" class="modal" style="display:none">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h3>Edit Your Collection</h3>
+    </div>
+    <div class="modal-body form-horizontal">        
+        <div class="control-group">
+            <label class="control-label">Collection Name:</label>
+            <div class="controls cLabel">
+               <input type="text" id="cName" />
+               <input type="hidden" id="hdnID" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Type:</label>
+            <div class="controls cLabel" id="cType"></div>
+            <input type="hidden" id="hdnTypeID" />
+        </div>
+        <div class="control-group">
+            <label class="control-label">Description:</label>
+            <div class="controls  cLabel">
+                
+                <textarea id="cDesc" rows="4" cols="1"></textarea>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Make Collection Public:</label>
+            <div class="controls checkbox cLabel">
+                <input type="checkbox" id="cPublic" /> Yes
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Completed Collection:</label>
+            <div class="controls checkbox cLabel">
+                <input type="checkbox" id="cComplete" /> Yes
+            </div>
+        </div>
+        <div id="alert-area"></div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-success" id="SaveBtn">Save Changes</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ttip').tooltip({
+            placement: 'right'
+        });
+
+        $("#myModal").modal({
+            show: false
+        });
+
+        $("#SaveBtn").click(function () {
+
+            var collectionID = $('#hdnID').val();
+            var cName = $('#cName').val();
+            var cDesc = $('#cDesc').val();
+            var cType = $('#hdnTypeID').val();
+            var cPublic = ($("#cPublic").attr('checked') == 'checked') ? true : false;
+            var cComplete = ($("#cComplete").attr('checked') == 'checked') ? true : false;
+
+            $.ajax({
+                url: "/Collection/EditCollection",
+                data: { CollectionID: collectionID, cName: cName, cType: cType, cDesc: cDesc, isPublic: cPublic, isComplete: cComplete },
+                success: function (result) {
+                    if (result == "success") {
+                        var columns = document.getElementById(collectionID);
+                        $('#collection' + collectionID).text(cName);
+                        $(columns.cells[2]).text(cDesc);
+
+                        if (cPublic)
+                            $(columns.cells[3]).text("Yes");
+                        else
+                            $(columns.cells[3]).text("No");
+
+                        if (cComplete)
+                            $(columns.cells[4]).text("Yes");
+                        else
+                            $(columns.cells[4]).text("No");
+
+                        $("#myModal").modal('hide');
+
+                    }
+                    else {
+                        newAlert('alert-error', "Error: " + result);
+                    }
+                }
+            }); // End of Ajax
+        }); // End of SaveBtn click
+    }); // End of document.ready
+
+    function EditModal(collectionID, typeID) {
+        $("#alert-area").removeClass("alert");
+        $("#alert-area").html("");
+
+        var columns = document.getElementById(collectionID);
+        $('#hdnID').val(collectionID);
+        $('#hdnTypeID').val(typeID);
+        $('#cName').val($(columns.cells[0]).text());
+        $('#cType').text($(columns.cells[1]).text());
+        $('#cDesc').text($(columns.cells[2]).text());
+
+        if ($.trim($(columns.cells[3]).text()) == "Yes")
+            $('#cPublic').attr('checked', 'checked');
+
+        if ($.trim($(columns.cells[4]).text()) == "Yes")
+            $('#cComplete').attr('checked', 'checked');
+
+        $('#myModal').modal('show');
+    }
+
+    function newAlert(type, message) {
+        $("#alert-area").html("<button type='button' class='close' data-dismiss='alert'>x</button>");
+        $("#alert-area").append($("<div class='alert-message" + type + " fade in'  style='color:#530304;' data-alert><p> " + message + " </p></div>"));
+        $("#alert-area").addClass("alert");
+        //$(".alert-message").delay(2000).fadeOut("slow", function () { $(this).remove(); });
+    }
+</script>

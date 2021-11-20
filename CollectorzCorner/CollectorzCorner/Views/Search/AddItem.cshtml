@@ -1,0 +1,111 @@
+﻿@model CollectorzCorner.Models.AddItemToDatabaseModel
+
+@{
+    ViewBag.Title = "Collectorz Corner";
+}
+
+<h2>Add an item to the database.</h2> 
+<p class="well">By adding an item to the database, you contribute to the Collectorz Corner community and make future searching easier for everyone!</p>
+
+<script src="../../Scripts/Database/AddItem.js" type="text/javascript"></script>
+
+@using (Html.BeginForm("AddItem", "Search", FormMethod.Post, new { @id = "addItemForm", @class = "form-horizontal", enctype = "multipart/form-data"}))
+{
+    @Html.ValidationSummary(true)
+
+    <input type="button" id="BackBtn" value="Back" style="display:none" class="btn btn-primary"/>
+    <br /><br />
+    
+        <div id="Step1">
+            <div class="control-group">
+                <label class="control-label">Item Type:</label>
+                <div class="controls">
+                    <select id="TypeList">
+                       @foreach (var collectionType in Model.loadingModel.Types)
+                       { 
+                           <option value="@collectionType.Key">@collectionType.Value</option>
+                       }
+                   </select>
+                    @Html.ValidationMessageFor(model => model.itemModel.TypeID)
+                    <input type="hidden" id="itemModel_TypeID" name="itemModel.TypeID" value="0" />
+                    <br /><br />
+                    <input type="button" id="NextBtn" value="Next" class="btn btn-primary"/>
+                </div>
+            </div>
+        
+            
+            <div id="ErrorMsg" style="display:none;color:Red">You must select the item before continuing.</div>
+        </div>
+    
+        <div id="Step2" style="display:none">
+            <div class="control-group">
+                <label class="control-label">Title:*</label>
+                <div class="controls">
+                    @Html.TextBoxFor(model => model.itemModel.Title, new { style = "width:205px;" })
+                    @Html.ValidationMessageFor(model => model.itemModel.Title)
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Select Series: (Optional)</label>
+                <div class="controls">
+                    <!-- Filled in on AJAX call-->
+                    <select id="SeriesList"></select> 
+                    @Html.ValidationMessageFor(model => model.itemModel.SeriesID)
+                </div>
+            </div>
+
+            <div class="seriesName control-group" style="display:none">
+                <label class="control-label">Series Name:</label>
+                <div class="controls">
+                    <input type="text" id="itemModel_SeriesName" name="itemModel.SeriesName" style="width:205px"/>
+                    <input type="hidden" id="itemModel_SeriesID" name="itemModel.SeriesID" value="0" />
+                </div>
+            </div>
+       
+            <div class="control-group">
+                <label class="control-label">Upload Picture:</label>
+                <div class="controls well span8" style="margin-left:17px">
+                    <input type="file" name="file" id="file" />
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Description:</label>
+                <div class="controls">
+                    @Html.TextAreaFor(model => model.itemModel.Description)
+                    @Html.ValidationMessageFor(model => model.itemModel.Description)
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Release Date:</label>
+                <div class="controls">
+                    <input type="text" name="itemModel.ReleaseDate" id="itemModel_ReleaseDate" readonly="readonly" style="cursor:pointer"/>
+                    @Html.ValidationMessageFor(model => model.itemModel.ReleaseDate)
+                </div>
+            </div>
+
+            <div class="control-group">
+               <label class="control-label" id="publisher"></label>
+                <div class="controls">
+                    @Html.EditorFor(model => model.itemModel.Publisher)
+                    @Html.ValidationMessageFor(model => model.itemModel.Publisher)
+                </div>
+            </div>
+            <div class="control-group">
+                <div id="DynamicContent"></div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Genres:</label>
+                @Html.HiddenFor(model => model.itemModel.Genres)
+                <div id="GenreGroup" class="well controls span8" style="margin-left:17px"> 
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="submit" value="Submit" onclick="return ConstructGenreJSONString(document.forms['addItemForm']);" class="btn btn-success"/>
+                </div>
+            </div>
+    </div>
+
+}

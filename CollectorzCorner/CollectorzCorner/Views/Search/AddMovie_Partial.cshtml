@@ -1,0 +1,47 @@
+﻿@model CollectorzCorner.Models.AddItemToDatabaseModel
+           
+@if (this.ViewContext.FormContext == null)
+{
+    this.ViewContext.FormContext = new FormContext();
+}
+
+<div class="control-group">
+    <label class="control-label">Director: *</label>
+    <div class="controls">
+        @Html.EditorFor(model => model.movieModel.Director)
+        @Html.ValidationMessageFor(model => model.movieModel.Director)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Writer:</label>
+    <div class="controls">
+        @Html.EditorFor(model => model.movieModel.Writer)
+        @Html.ValidationMessageFor(model => model.movieModel.Writer)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Producer:</label>
+    <div class="controls">
+        @Html.EditorFor(model => model.movieModel.Producer)
+        @Html.ValidationMessageFor(model => model.movieModel.Producer)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Content Rating:</label>
+    <div class="controls">
+        <select id="MovieRatingList" class="ratingList"></select>
+        @Html.ValidationMessageFor(model => model.movieModel.ContentRatingID)
+        <input type="hidden" id="movieModel_ContentRatingID" name="movieModel.ContentRatingID"/>
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Format:</label>
+    <div class="controls">
+        @Html.EditorFor(model => model.movieModel.Format)
+        @Html.ValidationMessageFor(model => model.movieModel.Format)
+    </div>
+</div>

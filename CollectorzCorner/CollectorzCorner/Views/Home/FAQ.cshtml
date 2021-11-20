@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "FAQ";
+}
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading faqHeader">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        How do I create a collection?
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse in">
+      <div class="accordion-inner">
+        To create a collection you go to the @Html.ActionLink("'My Collection' page","Index", "Collection",null,null) and press the @Html.ActionLink("'Create Collection' button","Create","Collection",null,null).
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading faqHeader">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+        How do I add an item to my collection?
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse">
+      <div class="accordion-inner">
+        You add an item to your collection by going over to the  @Html.ActionLink("Search page","Index","Search",null,null) and searching for your item. 
+        You can search on title, series, publishing studio and/or item type. Once you find what you are looking for you can press the green 'Collect Item' button to add it to one of your collections.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading faqHeader">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+        The item I want to add to my collection is not in the database. How can I add it to my collection?
+      </a>
+    </div>
+    <div id="collapseThree" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <p>You can add your own items to the database by going to the @Html.ActionLink("Search page","Index","Search",null,null) 
+        and pressing the button that says @Html.ActionLink("'Contribute to Database'","AddItem","Search",null,null). 
+        We encourage our users to enter in their own items if they cannot find it in the database because this helps out everyone in our community.</p>
+      </div>
+    </div>
+  </div>
+    <div class="accordion-group">
+    <div class="accordion-heading faqHeader">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+        How many Collections can I have?
+      </a>
+    </div>
+    <div id="collapseFour" class="accordion-body collapse">
+      <div class="accordion-inner">
+        You can have as many Collections as you would like to have. No limit!
+      </div>
+    </div>
+  </div>
+     <div class="accordion-group">
+    <div class="accordion-heading faqHeader">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">
+        How can I change my password?
+      </a>
+    </div>
+    <div id="collapseFive" class="accordion-body collapse">
+      <div class="accordion-inner">
+        Click on @Html.ActionLink("My Profile","Profile","Home",null,null) tab. You can change it there.
+      </div>
+    </div>
+  </div>
+     <div class="accordion-group">
+    <div class="accordion-heading faqHeader">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseSix">
+        How do I access the forum?
+      </a>
+    </div>
+    <div id="collapseSix" class="accordion-body collapse">
+      <div class="accordion-inner">
+        Click on the Forum tab. It will take you to the forums.
+      </div>
+    </div>
+  </div>
+     <div class="accordion-group">
+    <div class="accordion-heading faqHeader">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseSeven">
+        Do I need to make a new account to access the forum?
+      </a>
+    </div>
+    <div id="collapseSeven" class="accordion-body collapse">
+      <div class="accordion-inner">
+        Yes, you can make a free account at the forums. You can post and comment as you like.
+      </div>
+    </div>
+  </div>
+     <div class="accordion-group">
+    <div class="accordion-heading faqHeader">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseEight">
+        Can I add images to my collections?
+      </a>
+    </div>
+    <div id="collapseEight" class="accordion-body collapse">
+      <div class="accordion-inner">
+        Yes you can.
+      </div>
+    </div>
+  </div>
+     <div class="accordion-group">
+    <div class="accordion-heading faqHeader">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseNine">
+        Can I sign in using my Facebook account?
+      </a>
+    </div>
+    <div id="collapseNine" class="accordion-body collapse">
+      <div class="accordion-inner">
+        This feature will be available in the future.
+      </div>
+    </div>
+  </div>
+</div>

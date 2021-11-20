@@ -1,0 +1,40 @@
+﻿@model CollectorzCorner.User
+
+@{
+    ViewBag.Title = "Collectorz Corner";
+}
+<div class="form-horizontal span6">
+<h2 class="heading">My Profile</h2>
+
+  <div class="control-group">
+       <label class="control-label">Username: </label>
+       <div class="controls" style="margin-top:6px">
+            <label>@Model.Username</label>
+       </div>
+  </div>
+
+    <div class="well">
+        @Html.Partial("ChangePassword_Partial", new CollectorzCorner.Models.ChangePasswordModel())        
+    </div>
+
+  <div class="control-group">
+       <label class="control-label">Email: </label>
+       <div class="controls" style="margin-top:6px">
+            @Html.DisplayFor(model => model.Email)
+       </div>
+  </div>
+    
+    <div class="control-group">
+       <label class="control-label">Security Question: </label>
+       <div class="controls" style="margin-top:6px">
+            @Html.DisplayFor(model => model.SecurityQuestion)
+       </div>
+    </div>    
+            
+  <div class="control-group">
+       <label class="control-label">Creation Date: </label>
+       <div class="controls" style="margin-top:6px">
+            <label>@Model.CreationDate.ToString("MMMM dd, yyyy")</label>
+       </div>
+  </div>
+</div>

@@ -1,0 +1,1219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CCModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="CCModelStoreContainer">
+          <EntitySet Name="Books" EntityType="CCModel.Store.Books" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CollectionItems" EntityType="CCModel.Store.CollectionItems" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CollectionItemStatus" EntityType="CCModel.Store.CollectionItemStatus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Collections" EntityType="CCModel.Store.Collections" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ComicBooks" EntityType="CCModel.Store.ComicBooks" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ContentRatings" EntityType="CCModel.Store.ContentRatings" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Games" EntityType="CCModel.Store.Games" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Genres" EntityType="CCModel.Store.Genres" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ItemGenre" EntityType="CCModel.Store.ItemGenre" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Items" EntityType="CCModel.Store.Items" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ItemTypes" EntityType="CCModel.Store.ItemTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Movies" EntityType="CCModel.Store.Movies" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Pictures" EntityType="CCModel.Store.Pictures" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Platforms" EntityType="CCModel.Store.Platforms" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Series" EntityType="CCModel.Store.Series" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="CCModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Book_ItemID" Association="CCModel.Store.FK_Book_ItemID">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_TypeID" Association="CCModel.Store.FK_Collection_TypeID">
+            <End Role="ItemTypes" EntitySet="ItemTypes" />
+            <End Role="Collections" EntitySet="Collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_UserID" Association="CCModel.Store.FK_Collection_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Collections" EntitySet="Collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionItem_CollectionID" Association="CCModel.Store.FK_CollectionItem_CollectionID">
+            <End Role="Collections" EntitySet="Collections" />
+            <End Role="CollectionItems" EntitySet="CollectionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionItem_CollectionItemStatus" Association="CCModel.Store.FK_CollectionItem_CollectionItemStatus">
+            <End Role="CollectionItemStatus" EntitySet="CollectionItemStatus" />
+            <End Role="CollectionItems" EntitySet="CollectionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionItem_Item" Association="CCModel.Store.FK_CollectionItem_Item">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="CollectionItems" EntitySet="CollectionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComicBook_Item" Association="CCModel.Store.FK_ComicBook_Item">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="ComicBooks" EntitySet="ComicBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_ContentRatingID" Association="CCModel.Store.FK_Game_ContentRatingID">
+            <End Role="ContentRatings" EntitySet="ContentRatings" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_ItemID" Association="CCModel.Store.FK_Game_ItemID">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Platform" Association="CCModel.Store.FK_Game_Platform">
+            <End Role="Platforms" EntitySet="Platforms" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Genre_ItemType" Association="CCModel.Store.FK_Genre_ItemType">
+            <End Role="ItemTypes" EntitySet="ItemTypes" />
+            <End Role="Genres" EntitySet="Genres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_ItemType" Association="CCModel.Store.FK_Item_ItemType">
+            <End Role="ItemTypes" EntitySet="ItemTypes" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_PictureID" Association="CCModel.Store.FK_Item_PictureID">
+            <End Role="Pictures" EntitySet="Pictures" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Series" Association="CCModel.Store.FK_Item_Series">
+            <End Role="Series" EntitySet="Series" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemGenre_Genre" Association="CCModel.Store.FK_ItemGenre_Genre">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="ItemGenre" EntitySet="ItemGenre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemGenre_Item" Association="CCModel.Store.FK_ItemGenre_Item">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="ItemGenre" EntitySet="ItemGenre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movie_ItemID" Association="CCModel.Store.FK_Movie_ItemID">
+            <End Role="ContentRatings" EntitySet="ContentRatings" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="Author" Type="varchar(max)" Nullable="false" />
+          <Property Name="Illustrator" Type="varchar(max)" />
+          <Property Name="Editor" Type="varchar(max)" />
+          <Property Name="Plot" Type="varchar(max)" />
+          <Property Name="NoOfPages" Type="int" />
+          <Property Name="ReadLevel" Type="varchar" MaxLength="50" />
+          <Property Name="ISBN" Type="varchar" MaxLength="50" />
+          <Property Name="IsEBook" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CollectionItems">
+          <Key>
+            <PropertyRef Name="ItemID" />
+            <PropertyRef Name="CollectionID" />
+          </Key>
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="CollectionID" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="Rating" Type="tinyint" />
+          <Property Name="Review" Type="varchar(max)" />
+          <Property Name="StatusNote" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="CollectionItemStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Collections">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="TypeID" Type="nchar" Nullable="false" MaxLength="3" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="IsPublic" Type="bit" Nullable="false" />
+          <Property Name="IsComplete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ComicBooks">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="Writer" Type="varchar(max)" Nullable="false" />
+          <Property Name="Artist" Type="varchar(max)" />
+          <Property Name="Colorist" Type="varchar(max)" />
+          <Property Name="CoverArtist" Type="varchar(max)" />
+          <Property Name="Editor" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ContentRatings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Type" Type="nchar" Nullable="false" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="Developer" Type="varchar(max)" />
+          <Property Name="ContentRatingID" Type="varchar" MaxLength="3" />
+          <Property Name="PlatformID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="TypeID" Type="nchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="ItemGenre">
+          <Key>
+            <PropertyRef Name="Genres_ID" />
+            <PropertyRef Name="Items_ID" />
+          </Key>
+          <Property Name="Genres_ID" Type="int" Nullable="false" />
+          <Property Name="Items_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="PictureID" Type="int" />
+          <Property Name="ReleaseDate" Type="datetime" />
+          <Property Name="SeriesID" Type="int" />
+          <Property Name="TypeID" Type="nchar" Nullable="false" MaxLength="3" />
+          <Property Name="Publisher" Type="varchar(max)" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nchar" Nullable="false" MaxLength="3" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="Director" Type="varchar(max)" Nullable="false" />
+          <Property Name="Writer" Type="varchar(max)" />
+          <Property Name="Producer" Type="varchar(max)" />
+          <Property Name="Format" Type="varchar" MaxLength="50" />
+          <Property Name="ContentRatingID" Type="varchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="Pictures">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Href" Type="varchar" MaxLength="50" />
+          <Property Name="Alt" Type="varchar" MaxLength="50" />
+          <Property Name="pictureBytes" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Platforms">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Series">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="SecurityQuestion" Type="varchar(max)" />
+          <Property Name="SecurityAnswer" Type="varchar" MaxLength="150" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Book_ItemID">
+          <End Role="Items" Type="CCModel.Store.Items" Multiplicity="1" />
+          <End Role="Books" Type="CCModel.Store.Books" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_TypeID">
+          <End Role="ItemTypes" Type="CCModel.Store.ItemTypes" Multiplicity="1" />
+          <End Role="Collections" Type="CCModel.Store.Collections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Collections">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_UserID">
+          <End Role="Users" Type="CCModel.Store.Users" Multiplicity="1" />
+          <End Role="Collections" Type="CCModel.Store.Collections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Collections">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectionItem_CollectionID">
+          <End Role="Collections" Type="CCModel.Store.Collections" Multiplicity="1" />
+          <End Role="CollectionItems" Type="CCModel.Store.CollectionItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collections">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CollectionItems">
+              <PropertyRef Name="CollectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectionItem_CollectionItemStatus">
+          <End Role="CollectionItemStatus" Type="CCModel.Store.CollectionItemStatus" Multiplicity="1" />
+          <End Role="CollectionItems" Type="CCModel.Store.CollectionItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CollectionItemStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CollectionItems">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectionItem_Item">
+          <End Role="Items" Type="CCModel.Store.Items" Multiplicity="1" />
+          <End Role="CollectionItems" Type="CCModel.Store.CollectionItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CollectionItems">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComicBook_Item">
+          <End Role="Items" Type="CCModel.Store.Items" Multiplicity="1" />
+          <End Role="ComicBooks" Type="CCModel.Store.ComicBooks" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ComicBooks">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_ContentRatingID">
+          <End Role="ContentRatings" Type="CCModel.Store.ContentRatings" Multiplicity="0..1" />
+          <End Role="Games" Type="CCModel.Store.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContentRatings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="ContentRatingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_ItemID">
+          <End Role="Items" Type="CCModel.Store.Items" Multiplicity="1" />
+          <End Role="Games" Type="CCModel.Store.Games" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Platform">
+          <End Role="Platforms" Type="CCModel.Store.Platforms" Multiplicity="1" />
+          <End Role="Games" Type="CCModel.Store.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platforms">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="PlatformID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Genre_ItemType">
+          <End Role="ItemTypes" Type="CCModel.Store.ItemTypes" Multiplicity="0..1" />
+          <End Role="Genres" Type="CCModel.Store.Genres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Genres">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_ItemType">
+          <End Role="ItemTypes" Type="CCModel.Store.ItemTypes" Multiplicity="1" />
+          <End Role="Items" Type="CCModel.Store.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_PictureID">
+          <End Role="Pictures" Type="CCModel.Store.Pictures" Multiplicity="0..1" />
+          <End Role="Items" Type="CCModel.Store.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pictures">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="PictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Series">
+          <End Role="Series" Type="CCModel.Store.Series" Multiplicity="0..1" />
+          <End Role="Items" Type="CCModel.Store.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Series">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="SeriesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemGenre_Genre">
+          <End Role="Genres" Type="CCModel.Store.Genres" Multiplicity="1" />
+          <End Role="ItemGenre" Type="CCModel.Store.ItemGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemGenre">
+              <PropertyRef Name="Genres_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemGenre_Item">
+          <End Role="Items" Type="CCModel.Store.Items" Multiplicity="1" />
+          <End Role="ItemGenre" Type="CCModel.Store.ItemGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemGenre">
+              <PropertyRef Name="Items_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movie_ItemID">
+          <End Role="ContentRatings" Type="CCModel.Store.ContentRatings" Multiplicity="0..1" />
+          <End Role="Movies" Type="CCModel.Store.Movies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContentRatings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Movies">
+              <PropertyRef Name="ContentRatingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CCModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="CCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books" EntityType="CCModel.Book" />
+          <EntitySet Name="CollectionItems" EntityType="CCModel.CollectionItem" />
+          <EntitySet Name="CollectionItemStatus" EntityType="CCModel.CollectionItemStatu" />
+          <EntitySet Name="Collections" EntityType="CCModel.Collection" />
+          <EntitySet Name="ComicBooks" EntityType="CCModel.ComicBook" />
+          <EntitySet Name="ContentRatings" EntityType="CCModel.ContentRating" />
+          <EntitySet Name="Games" EntityType="CCModel.Game" />
+          <EntitySet Name="Genres" EntityType="CCModel.Genre" />
+          <EntitySet Name="Items" EntityType="CCModel.Item" />
+          <EntitySet Name="ItemTypes" EntityType="CCModel.ItemType" />
+          <EntitySet Name="Movies" EntityType="CCModel.Movie" />
+          <EntitySet Name="Pictures" EntityType="CCModel.Picture" />
+          <EntitySet Name="Platforms" EntityType="CCModel.Platform" />
+          <EntitySet Name="Series" EntityType="CCModel.Series" />
+          <EntitySet Name="Users" EntityType="CCModel.User" />
+          <AssociationSet Name="FK_Book_ItemID" Association="CCModel.FK_Book_ItemID">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionItem_CollectionID" Association="CCModel.FK_CollectionItem_CollectionID">
+            <End Role="Collection" EntitySet="Collections" />
+            <End Role="CollectionItem" EntitySet="CollectionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionItem_CollectionItemStatus" Association="CCModel.FK_CollectionItem_CollectionItemStatus">
+            <End Role="CollectionItemStatu" EntitySet="CollectionItemStatus" />
+            <End Role="CollectionItem" EntitySet="CollectionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionItem_Item" Association="CCModel.FK_CollectionItem_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="CollectionItem" EntitySet="CollectionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_TypeID" Association="CCModel.FK_Collection_TypeID">
+            <End Role="ItemType" EntitySet="ItemTypes" />
+            <End Role="Collection" EntitySet="Collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_UserID" Association="CCModel.FK_Collection_UserID">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Collection" EntitySet="Collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComicBook_Item" Association="CCModel.FK_ComicBook_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="ComicBook" EntitySet="ComicBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_ContentRatingID" Association="CCModel.FK_Game_ContentRatingID">
+            <End Role="ContentRating" EntitySet="ContentRatings" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movie_ItemID" Association="CCModel.FK_Movie_ItemID">
+            <End Role="ContentRating" EntitySet="ContentRatings" />
+            <End Role="Movy" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_ItemID" Association="CCModel.FK_Game_ItemID">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Platform" Association="CCModel.FK_Game_Platform">
+            <End Role="Platform" EntitySet="Platforms" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Genre_ItemType" Association="CCModel.FK_Genre_ItemType">
+            <End Role="ItemType" EntitySet="ItemTypes" />
+            <End Role="Genre" EntitySet="Genres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_ItemType" Association="CCModel.FK_Item_ItemType">
+            <End Role="ItemType" EntitySet="ItemTypes" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_PictureID" Association="CCModel.FK_Item_PictureID">
+            <End Role="Picture" EntitySet="Pictures" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Series" Association="CCModel.FK_Item_Series">
+            <End Role="Series" EntitySet="Series" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="ItemGenre" Association="CCModel.ItemGenre">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Type="Int32" Name="ItemID" Nullable="false" />
+          <Property Type="String" Name="Author" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Illustrator" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Editor" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Plot" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="NoOfPages" />
+          <Property Type="String" Name="ReadLevel" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ISBN" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsEBook" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="CCModel.FK_Book_ItemID" FromRole="Book" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="CollectionItem">
+          <Key>
+            <PropertyRef Name="ItemID" />
+            <PropertyRef Name="CollectionID" />
+          </Key>
+          <Property Type="Int32" Name="ItemID" Nullable="false" />
+          <Property Type="Int32" Name="CollectionID" Nullable="false" />
+          <Property Type="String" Name="StatusID" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="Byte" Name="Rating" />
+          <Property Type="String" Name="Review" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="StatusNote" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Collection" Relationship="CCModel.FK_CollectionItem_CollectionID" FromRole="CollectionItem" ToRole="Collection" />
+          <NavigationProperty Name="CollectionItemStatu" Relationship="CCModel.FK_CollectionItem_CollectionItemStatus" FromRole="CollectionItem" ToRole="CollectionItemStatu" />
+          <NavigationProperty Name="Item" Relationship="CCModel.FK_CollectionItem_Item" FromRole="CollectionItem" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="CollectionItemStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CollectionItems" Relationship="CCModel.FK_CollectionItem_CollectionItemStatus" FromRole="CollectionItemStatu" ToRole="CollectionItem" />
+        </EntityType>
+        <EntityType Name="Collection">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TypeID" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsPublic" Nullable="false" />
+          <Property Type="Boolean" Name="IsComplete" Nullable="false" />
+          <NavigationProperty Name="CollectionItems" Relationship="CCModel.FK_CollectionItem_CollectionID" FromRole="Collection" ToRole="CollectionItem" />
+          <NavigationProperty Name="ItemType" Relationship="CCModel.FK_Collection_TypeID" FromRole="Collection" ToRole="ItemType" />
+          <NavigationProperty Name="User" Relationship="CCModel.FK_Collection_UserID" FromRole="Collection" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ComicBook">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Type="Int32" Name="ItemID" Nullable="false" />
+          <Property Type="String" Name="Writer" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Artist" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Colorist" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CoverArtist" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Editor" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Item" Relationship="CCModel.FK_ComicBook_Item" FromRole="ComicBook" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="ContentRating">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Games" Relationship="CCModel.FK_Game_ContentRatingID" FromRole="ContentRating" ToRole="Game" />
+          <NavigationProperty Name="Movies" Relationship="CCModel.FK_Movie_ItemID" FromRole="ContentRating" ToRole="Movy" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Type="Int32" Name="ItemID" Nullable="false" />
+          <Property Type="String" Name="Developer" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ContentRatingID" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="PlatformID" Nullable="false" />
+          <NavigationProperty Name="ContentRating" Relationship="CCModel.FK_Game_ContentRatingID" FromRole="Game" ToRole="ContentRating" />
+          <NavigationProperty Name="Item" Relationship="CCModel.FK_Game_ItemID" FromRole="Game" ToRole="Item" />
+          <NavigationProperty Name="Platform" Relationship="CCModel.FK_Game_Platform" FromRole="Game" ToRole="Platform" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TypeID" MaxLength="3" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ItemType" Relationship="CCModel.FK_Genre_ItemType" FromRole="Genre" ToRole="ItemType" />
+          <NavigationProperty Name="Items" Relationship="CCModel.ItemGenre" FromRole="Genre" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="PictureID" />
+          <Property Type="DateTime" Name="ReleaseDate" />
+          <Property Type="Int32" Name="SeriesID" />
+          <Property Type="String" Name="TypeID" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Publisher" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <NavigationProperty Name="Book" Relationship="CCModel.FK_Book_ItemID" FromRole="Item" ToRole="Book" />
+          <NavigationProperty Name="CollectionItems" Relationship="CCModel.FK_CollectionItem_Item" FromRole="Item" ToRole="CollectionItem" />
+          <NavigationProperty Name="ComicBook" Relationship="CCModel.FK_ComicBook_Item" FromRole="Item" ToRole="ComicBook" />
+          <NavigationProperty Name="Game" Relationship="CCModel.FK_Game_ItemID" FromRole="Item" ToRole="Game" />
+          <NavigationProperty Name="ItemType" Relationship="CCModel.FK_Item_ItemType" FromRole="Item" ToRole="ItemType" />
+          <NavigationProperty Name="Picture" Relationship="CCModel.FK_Item_PictureID" FromRole="Item" ToRole="Picture" />
+          <NavigationProperty Name="Series" Relationship="CCModel.FK_Item_Series" FromRole="Item" ToRole="Series" />
+          <NavigationProperty Name="Genres" Relationship="CCModel.ItemGenre" FromRole="Item" ToRole="Genre" />
+        </EntityType>
+        <EntityType Name="ItemType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Collections" Relationship="CCModel.FK_Collection_TypeID" FromRole="ItemType" ToRole="Collection" />
+          <NavigationProperty Name="Genres" Relationship="CCModel.FK_Genre_ItemType" FromRole="ItemType" ToRole="Genre" />
+          <NavigationProperty Name="Items" Relationship="CCModel.FK_Item_ItemType" FromRole="ItemType" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Type="Int32" Name="ItemID" Nullable="false" />
+          <Property Type="String" Name="Director" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Writer" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Producer" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Format" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ContentRatingID" MaxLength="3" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ContentRating" Relationship="CCModel.FK_Movie_ItemID" FromRole="Movy" ToRole="ContentRating" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Href" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Alt" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="pictureBytes" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Items" Relationship="CCModel.FK_Item_PictureID" FromRole="Picture" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Platform">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Games" Relationship="CCModel.FK_Game_Platform" FromRole="Platform" ToRole="Game" />
+        </EntityType>
+        <EntityType Name="Series">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Items" Relationship="CCModel.FK_Item_Series" FromRole="Series" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="BirthDate" />
+          <Property Type="String" Name="SecurityQuestion" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SecurityAnswer" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastLoginDate" Nullable="false" />
+          <Property Type="Boolean" Name="IsApproved" Nullable="false" />
+          <Property Type="Boolean" Name="IsLockedOut" Nullable="false" />
+          <NavigationProperty Name="Collections" Relationship="CCModel.FK_Collection_UserID" FromRole="User" ToRole="Collection" />
+        </EntityType>
+        <Association Name="FK_Book_ItemID">
+          <End Type="CCModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="CCModel.Book" Role="Book" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectionItem_CollectionID">
+          <End Type="CCModel.Collection" Role="Collection" Multiplicity="1" />
+          <End Type="CCModel.CollectionItem" Role="CollectionItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collection">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CollectionItem">
+              <PropertyRef Name="CollectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectionItem_CollectionItemStatus">
+          <End Type="CCModel.CollectionItemStatu" Role="CollectionItemStatu" Multiplicity="1" />
+          <End Type="CCModel.CollectionItem" Role="CollectionItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CollectionItemStatu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CollectionItem">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectionItem_Item">
+          <End Type="CCModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="CCModel.CollectionItem" Role="CollectionItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CollectionItem">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_TypeID">
+          <End Type="CCModel.ItemType" Role="ItemType" Multiplicity="1" />
+          <End Type="CCModel.Collection" Role="Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_UserID">
+          <End Type="CCModel.User" Role="User" Multiplicity="1" />
+          <End Type="CCModel.Collection" Role="Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComicBook_Item">
+          <End Type="CCModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="CCModel.ComicBook" Role="ComicBook" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ComicBook">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_ContentRatingID">
+          <End Type="CCModel.ContentRating" Role="ContentRating" Multiplicity="0..1" />
+          <End Type="CCModel.Game" Role="Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContentRating">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="ContentRatingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movie_ItemID">
+          <End Type="CCModel.ContentRating" Role="ContentRating" Multiplicity="0..1" />
+          <End Type="CCModel.Movie" Role="Movy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContentRating">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Movy">
+              <PropertyRef Name="ContentRatingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_ItemID">
+          <End Type="CCModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="CCModel.Game" Role="Game" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Platform">
+          <End Type="CCModel.Platform" Role="Platform" Multiplicity="1" />
+          <End Type="CCModel.Game" Role="Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platform">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="PlatformID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Genre_ItemType">
+          <End Type="CCModel.ItemType" Role="ItemType" Multiplicity="0..1" />
+          <End Type="CCModel.Genre" Role="Genre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Genre">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_ItemType">
+          <End Type="CCModel.ItemType" Role="ItemType" Multiplicity="1" />
+          <End Type="CCModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_PictureID">
+          <End Type="CCModel.Picture" Role="Picture" Multiplicity="0..1" />
+          <End Type="CCModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Picture">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="PictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Series">
+          <End Type="CCModel.Series" Role="Series" Multiplicity="0..1" />
+          <End Type="CCModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Series">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="SeriesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ItemGenre">
+          <End Type="CCModel.Genre" Role="Genre" Multiplicity="*" />
+          <End Type="CCModel.Item" Role="Item" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping CdmEntityContainer="CCEntities" StorageEntityContainer="CCModelStoreContainer">
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="CCModel.Book">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="IsEBook" ColumnName="IsEBook" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="ReadLevel" ColumnName="ReadLevel" />
+                <ScalarProperty Name="NoOfPages" ColumnName="NoOfPages" />
+                <ScalarProperty Name="Plot" ColumnName="Plot" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="Illustrator" ColumnName="Illustrator" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CollectionItems">
+            <EntityTypeMapping TypeName="CCModel.CollectionItem">
+              <MappingFragment StoreEntitySet="CollectionItems">
+                <ScalarProperty Name="StatusNote" ColumnName="StatusNote" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CollectionItemStatus">
+            <EntityTypeMapping TypeName="CCModel.CollectionItemStatu">
+              <MappingFragment StoreEntitySet="CollectionItemStatus">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Collections">
+            <EntityTypeMapping TypeName="CCModel.Collection">
+              <MappingFragment StoreEntitySet="Collections">
+                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
+                <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComicBooks">
+            <EntityTypeMapping TypeName="CCModel.ComicBook">
+              <MappingFragment StoreEntitySet="ComicBooks">
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CoverArtist" ColumnName="CoverArtist" />
+                <ScalarProperty Name="Colorist" ColumnName="Colorist" />
+                <ScalarProperty Name="Artist" ColumnName="Artist" />
+                <ScalarProperty Name="Writer" ColumnName="Writer" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContentRatings">
+            <EntityTypeMapping TypeName="CCModel.ContentRating">
+              <MappingFragment StoreEntitySet="ContentRatings">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="CCModel.Game">
+              <MappingFragment StoreEntitySet="Games">
+                <ScalarProperty Name="PlatformID" ColumnName="PlatformID" />
+                <ScalarProperty Name="ContentRatingID" ColumnName="ContentRatingID" />
+                <ScalarProperty Name="Developer" ColumnName="Developer" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="CCModel.Genre">
+              <MappingFragment StoreEntitySet="Genres">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="CCModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="SeriesID" ColumnName="SeriesID" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemTypes">
+            <EntityTypeMapping TypeName="CCModel.ItemType">
+              <MappingFragment StoreEntitySet="ItemTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movies">
+            <EntityTypeMapping TypeName="CCModel.Movie">
+              <MappingFragment StoreEntitySet="Movies">
+                <ScalarProperty Name="ContentRatingID" ColumnName="ContentRatingID" />
+                <ScalarProperty Name="Format" ColumnName="Format" />
+                <ScalarProperty Name="Producer" ColumnName="Producer" />
+                <ScalarProperty Name="Writer" ColumnName="Writer" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pictures">
+            <EntityTypeMapping TypeName="CCModel.Picture">
+              <MappingFragment StoreEntitySet="Pictures">
+                <ScalarProperty Name="pictureBytes" ColumnName="pictureBytes" />
+                <ScalarProperty Name="Alt" ColumnName="Alt" />
+                <ScalarProperty Name="Href" ColumnName="Href" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Platforms">
+            <EntityTypeMapping TypeName="CCModel.Platform">
+              <MappingFragment StoreEntitySet="Platforms">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Series">
+            <EntityTypeMapping TypeName="CCModel.Series">
+              <MappingFragment StoreEntitySet="Series">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CCModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="SecurityAnswer" ColumnName="SecurityAnswer" />
+                <ScalarProperty Name="SecurityQuestion" ColumnName="SecurityQuestion" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ItemGenre" TypeName="CCModel.ItemGenre" StoreEntitySet="ItemGenre">
+            <EndProperty Name="Item">
+              <ScalarProperty Name="ID" ColumnName="Items_ID" />
+            </EndProperty>
+            <EndProperty Name="Genre">
+              <ScalarProperty Name="ID" ColumnName="Genres_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="CCEntity" ZoomLevel="74">
+        <EntityTypeShape EntityType="CCModel.Book" Width="1.5" PointX="7.5" PointY="6.75" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="CCModel.CollectionItem" Width="1.5" PointX="10.5" PointY="7.75" Height="2.7494921875000031" />
+        <EntityTypeShape EntityType="CCModel.CollectionItemStatu" Width="1.5" PointX="8.25" PointY="3.875" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="CCModel.Collection" Width="1.5" PointX="3" PointY="6.375" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="CCModel.ComicBook" Width="1.5" PointX="7.5" PointY="10.375" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="CCModel.ContentRating" Width="1.5" PointX="8.25" PointY="13.625" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="CCModel.Game" Width="1.5" PointX="10.5" PointY="11.625" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="CCModel.Genre" Width="1.5" PointX="3" PointY="10.625" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="CCModel.Item" Width="1.5" PointX="5.25" PointY="7.625" Height="4.2879036458333388" />
+        <EntityTypeShape EntityType="CCModel.ItemType" Width="1.5" PointX="0.75" PointY="6.875" Height="1.9802864583333246" />
+        <EntityTypeShape EntityType="CCModel.Movie" Width="1.5" PointX="10.5" PointY="15.375" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="CCModel.Picture" Width="1.5" PointX="3" PointY="3.625" Height="1.9802864583333246" />
+        <EntityTypeShape EntityType="CCModel.Platform" Width="1.5" PointX="8.25" PointY="16.375" Height="1.595683593749996" />
+        <EntityTypeShape EntityType="CCModel.Series" Width="1.5" PointX="3" PointY="14.375" Height="1.595683593749996" />
+        <EntityTypeShape EntityType="CCModel.User" Width="1.5" PointX="0.75" PointY="2.25" Height="3.326396484374996" />
+        <AssociationConnector Association="CCModel.FK_Book_ItemID" >
+          <ConnectorPoint PointX="6.75" PointY="8.6583968098958337" />
+          <ConnectorPoint PointX="7.5" PointY="8.6583968098958337" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_CollectionItem_CollectionID" >
+          <ConnectorPoint PointX="4.5" PointY="6.53125" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="6.5312499999999991" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="6.53125" />
+          <ConnectorPoint PointX="9.3229166666666661" PointY="6.5312499999999991" />
+          <ConnectorPoint PointX="9.4895833333333339" PointY="6.53125" />
+          <ConnectorPoint PointX="11.25" PointY="6.53125" />
+          <ConnectorPoint PointX="11.25" PointY="7.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_CollectionItem_CollectionItemStatus" >
+          <ConnectorPoint PointX="9.40625" PointY="5.4706835937500031" />
+          <ConnectorPoint PointX="9.40625" PointY="10.033396809895834" />
+          <ConnectorPoint PointX="10.5" PointY="10.033396809895834" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_CollectionItem_Item" >
+          <ConnectorPoint PointX="6.75" PointY="9.83134521484375" />
+          <ConnectorPoint PointX="9.3229166666666661" PointY="9.83134521484375" />
+          <ConnectorPoint PointX="9.4895833333333339" PointY="9.83134521484375" />
+          <ConnectorPoint PointX="10.5" PointY="9.83134521484375" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_Collection_TypeID" >
+          <ConnectorPoint PointX="2.25" PointY="7.8651432291666623" />
+          <ConnectorPoint PointX="3" PointY="7.8651432291666623" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_Collection_UserID" >
+          <ConnectorPoint PointX="2.25" PointY="5.576396484374996" />
+          <ConnectorPoint PointX="2.625" PointY="5.951396484374996" />
+          <ConnectorPoint PointX="2.625" PointY="7.088819614583338" />
+          <ConnectorPoint PointX="3" PointY="7.088819614583338" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_ComicBook_Item" >
+          <ConnectorPoint PointX="6.75" PointY="11.143951822916669" />
+          <ConnectorPoint PointX="7.5" PointY="11.143951822916669" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_Game_ContentRatingID" >
+          <ConnectorPoint PointX="9.75" PointY="13.807444661458334" />
+          <ConnectorPoint PointX="10.229166666666666" PointY="13.807444661458334" />
+          <ConnectorPoint PointX="10.395833333333334" PointY="13.807444661458334" />
+          <ConnectorPoint PointX="10.5" PointY="13.807444661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_Movie_ItemID" >
+          <ConnectorPoint PointX="9.75" PointY="15.605286458333339" />
+          <ConnectorPoint PointX="10.125" PointY="15.980286458333339" />
+          <ConnectorPoint PointX="10.125" PointY="15" />
+          <ConnectorPoint PointX="10.253574434901122" PointY="15.12857443490112" />
+          <ConnectorPoint PointX="10.371425565098878" PointY="15.246425565098878" />
+          <ConnectorPoint PointX="10.5" PointY="15.375" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_Game_ItemID" >
+          <ConnectorPoint PointX="6" PointY="11.912903645833339" />
+          <ConnectorPoint PointX="6" PointY="13.182444661458334" />
+          <ConnectorPoint PointX="10.229166666666666" PointY="13.182444661458334" />
+          <ConnectorPoint PointX="10.395833333333334" PointY="13.182444661458334" />
+          <ConnectorPoint PointX="10.5" PointY="13.182444661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_Game_Platform" >
+          <ConnectorPoint PointX="9.75" PointY="16.43730669230769" />
+          <ConnectorPoint PointX="10.3125" PointY="15.87480669230769" />
+          <ConnectorPoint PointX="10.3125" PointY="12.372470330729172" />
+          <ConnectorPoint PointX="10.5" PointY="12.372470330729172" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_Genre_ItemType" >
+          <ConnectorPoint PointX="1.5" PointY="8.8552864583333246" />
+          <ConnectorPoint PointX="1.5" PointY="11.615143229166669" />
+          <ConnectorPoint PointX="3" PointY="11.615143229166669" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_Item_ItemType" >
+          <ConnectorPoint PointX="1.9062525" PointY="8.8552864583333246" />
+          <ConnectorPoint PointX="1.9062525" PointY="9.9708968098958337" />
+          <ConnectorPoint PointX="5.25" PointY="9.9708968098958337" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_Item_PictureID" >
+          <ConnectorPoint PointX="4.5" PointY="4.6151432291666623" />
+          <ConnectorPoint PointX="6" PointY="4.6151432291666623" />
+          <ConnectorPoint PointX="6" PointY="7.625" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.FK_Item_Series" >
+          <ConnectorPoint PointX="4.5" PointY="15.172841796874998" />
+          <ConnectorPoint PointX="5.5937475" PointY="15.172841796874998" />
+          <ConnectorPoint PointX="5.5937475" PointY="11.912903645833339" />
+        </AssociationConnector>
+        <AssociationConnector Association="CCModel.ItemGenre" >
+          <ConnectorPoint PointX="4.5" PointY="11.268951822916669" />
+          <ConnectorPoint PointX="5.25" PointY="11.268951822916669" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

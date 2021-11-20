@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Collectorz Corner</title>
+
+      <link href="@Url.Content("~/Content/Site.less")" rel="stylesheet" type="text/css" /> 
+      @* <link href="@Url.Content("~/Content/2.less")" rel="stylesheet" type="text/css" /> *@
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+
+    <script src="../../Scripts/jquery-ui-1.8.11.min.js" type="text/javascript"></script>
+    <link href="../../Content/themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+    <link href="../../Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="../../Content/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+  @*    @{ if (Session["theme"] == null)
+       { Session["theme"] = "Original"; }
+        @: <input type="hidden" id="hdnTheme" value='@Session["theme"].ToString()' /> 
+
+       switch (Session["theme"].ToString())
+       {
+           case "Original":
+           <link href="@Url.Content("../../Content/Site.less")" rel="stylesheet" type="text/css" />
+                  break;
+
+           case "second":
+           <link href="@Url.Content("../../Content/2.less")" rel="stylesheet" type="text/css" />
+                  break;
+
+           default:
+            <link href="@Url.Content("../../Content/Site.less")" rel="stylesheet" type="text/css" />
+                   break;
+       }
+        }*@
+        
+    <script type="text/javascript">
+        var _debug = false;
+        var _placeholderSupport = function () {
+            var t = document.createElement("input");
+            t.type = "text";
+            return (typeof t.placeholder !== "undefined");
+        } ();
+
+        window.onload = function () {
+            var arrInputs = document.getElementsByTagName("input");
+            for (var i = 0; i < arrInputs.length; i++) {
+                var curInput = arrInputs[i];
+                if (!curInput.type || curInput.type == "" || curInput.type == "text" || curInput.type == "password")
+                    HandlePlaceholder(curInput);
+            }
+        };
+
+        function HandlePlaceholder(oTextbox) {
+            if (!_placeholderSupport) {
+                var curPlaceholder = oTextbox.getAttribute("placeholder");
+                if (curPlaceholder == "Password") { oTextbox.setAttribute("type", "text"); }
+                if (curPlaceholder && curPlaceholder.length > 0) {
+                    Debug("Placeholder found for input box '" + oTextbox.name + "': " + curPlaceholder);
+                    oTextbox.value = curPlaceholder;
+                    oTextbox.setAttribute("old_color", oTextbox.style.color);
+                    oTextbox.style.color = "#c0c0c0";
+                    oTextbox.onfocus = function () {
+                        if (curPlaceholder == "Password") { oTextbox.setAttribute("type", "password"); }
+                        Debug("input box '" + this.name + "' focus");
+                        this.style.color = this.getAttribute("old_color");
+                        if (this.value === curPlaceholder)
+                            this.value = "";
+                    };
+                    oTextbox.onblur = function () {
+                        Debug("input box '" + this.name + "' blur");
+                        if (this.value === "") {
+                            if (curPlaceholder == "Password") { oTextbox.setAttribute("type", "text"); }
+                            this.style.color = "#c0c0c0";
+                            this.value = curPlaceholder;
+                        }
+                    };
+                }
+                else {
+                    Debug("input box '" + oTextbox.name + "' does not have placeholder attribute");
+                }
+            }
+            else {
+                Debug("browser has native support for placeholder");
+            }
+        }
+
+        function Debug(msg) {
+            if (typeof _debug !== "undefined" && _debug) {
+                var oConsole = document.getElementById("Console");
+                if (!oConsole) {
+                    oConsole = document.createElement("div");
+                    oConsole.id = "Console";
+                    document.body.appendChild(oConsole);
+                }
+                oConsole.innerHTML += msg + "<br />";
+            }
+        }
+        
+       @*
+         $(document).ready(function () {
+            $("#theme").change(function () {
+                var theme = $(this).val();
+                $.ajax({
+                    type: "Delete",
+                    url: "/Home/SetTheme",
+                    data: { theme: theme }
+                });
+
+                location.reload();
+            });
+
+            // Makes the dropdown select the selected theme
+         var theme = $("#hdnTheme").val();
+            if(theme != "" || theme != null){
+            $("#theme").val(theme).attr('selected',true);
+            }
+            
+        });
+        *@
+
+    </script>
+   
+
+   
+</head>
+<body>
+    <div class="page">
+        <div id="header">
+            <div id="banner">
+                 <a class="homeLink" href="/Home"><img src="../../Content/Images/CCBanner.png" alt="banner"/></a>
+                @* <a class="homeLink" href="../Home"><img src="../../Content/Images/Banner-fan.png" alt="banner"/></a> *@
+                <!--<h1>Collectorz Corner</h1>-->
+            </div>
+
+            <div id="logindisplay">
+                @Html.Partial("_LogOnPartial", new CollectorzCorner.Models.LogOnModel())
+            </div>
+            <div id="menucontainer" style="text-align:right">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <ul id="menu">
+                    <li id="icon">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("My Collections", "Index", "Collection")</li>
+                    <li>@Html.ActionLink("Search Database", "Index", "Search")</li>
+                    <li>@Html.ActionLink("My Profile", "Profile", "Home")</li>
+                    <li><a href="http://collectorzcorner.prophpbb.com/index.php">Forum</a></li>
+                    <li>@Html.ActionLink("Contact Us", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("FAQ", "FAQ", "Home")</li>
+                </ul>
+            }
+            else
+            {
+                <ul id="menu">
+                    <li id="icon">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Search Database", "Index", "Search")</li>
+                    <li><a href="http://collectorzcorner.prophpbb.com/index.php">Forum</a></li>
+                    <li>@Html.ActionLink("Contact Us", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("FAQ", "FAQ", "Home")</li>
+                </ul>
+            }
+             </div>
+           
+        </div>
+     @*   <div id="CC">
+                <h1>&nbsp;&nbsp; Collectorz Corner</h1>
+        </div>*@
+        <br />
+        <br />
+        <div id="main">
+            @RenderBody()
+        </div>
+        <div id="footer">
+        Copyright © 2012 Collectorz Corner. All rights reserved
+        </div>
+    </div>
+    
+    @*
+    <p>
+        <select id="theme">
+            <option selected="selected" disabled="disabled">Choose Theme</option>
+            <option value="Original">Original</option>
+            <option value="second">second</option>
+         </select>
+    </p>
+
+    *@
+</body>
+</html>

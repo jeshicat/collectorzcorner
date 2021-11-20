@@ -1,0 +1,252 @@
+﻿@model CollectorzCorner.Models.CollectionItemsModel
+
+@{
+    ViewBag.Title = "Collectorz Corner";
+}
+
+<h2>@Model.CollectionName</h2>
+<input type="hidden" id="hdnCollectionName" value="@Model.CollectionName" />
+<p class="well">Go to the @Html.ActionLink("Search","Index","Search",new{},new{}) page to add an item to your collection! </p>
+@Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-primary", style="color:white;text-decoration:none;" })
+@Html.ActionLink("Add Item to Collection", "Index", "Search", new { }, new { @class = "btn btn-success", style = "color:white;text-decoration:none;" })
+<br /><br />
+<table class="table table-hover table-striped">
+<tr>
+    <th>Name</th>
+    @*<th>Thumbnail</th>*@
+    <th>Status</th>
+    <th>Rating</th>
+    <th>Review</th>
+    <th></th>
+</tr>
+@foreach (var item in Model.Items)
+{
+    string name = Html.Action("GetItemTitleByID", "Collection", new { ItemID = item.ItemID }).ToString();
+    <tr id="@item.ItemID">
+        <td>
+           @* 
+            @{var src = Url.Action("DisplayThumbImageForItemID", "Search", new { ItemID = item.ItemID, width = 100, height = 100 });}
+            @Html.ActionLink(name, "ViewItem", "Search", new { id = item.ItemID }, new { @id = "item" + item.ItemID, rel = "popover", onmouseover = "CreatePopover('item" + item.ItemID + "', '" + @src + "')" })
+            *@
+
+            @Html.ActionLink(name, "ViewItem", "Search", new { id = item.ItemID }, new { })
+        </td>
+@*        <td>
+            @{
+                var pictureID = Html.Action("GetPictureID","Search",new{id = item.ItemID});
+              
+                if (!pictureID.ToString().IsEmpty())
+                {
+                    @:<img src='@Url.Action("DisplayThumbImage","Search",new { id = pictureID, width=100, height=100 })' alt='' />
+                }
+            }
+        </td>*@
+        
+        @*<td>@Html.ActionLink(name, "ViewItem", "Search", new { id = item.ItemID }, new { @id="thumbTool", title="<img src='@Url.Action('DisplayThumbImage','Search',new { id = Model.Item.PictureID, width=100, height=100 }) alt='' />"})</td>*@
+        <td>
+            @Html.Action("GetStatusDescriptionByID", "Collection", new { StatusID = item.StatusID })
+            @if(item.StatusID.Equals("BRW") && item.StatusNote != null)
+            {
+                @: by @item.StatusNote
+            }
+        </td>
+        <td>@if(item.Rating == null)
+            {
+                @: No rating
+            }
+            else{ 
+                @:@item.Rating/5 
+            }
+        </td>
+        <td>@item.Review</td>
+        <td>
+            <a href="" onclick="EditModal(@item.CollectionID, @item.ItemID, '@item.StatusID');return false;" class="btn btn-warning btn-mini" style="color:White;text-decoration:none">Edit</a>
+            @Html.ActionLink("Remove", "RemoveItemFromCollection", new { CollectionID = item.CollectionID, ItemID = item.ItemID }, new { @class = "btn btn-danger btn-mini", style="color:white;text-decoration:none" })
+        </td>
+    </tr>
+}
+</table>
+
+<div id="myModal" class="modal" style="display:none">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h3>Edit Your Collection Item</h3>
+    </div>
+    <div class="modal-body form-horizontal">        
+        <div class="control-group">
+            <label class="control-label">Collection Name:</label>
+               <div class="controls cLabel" id="cName"></div>
+               <input type="hidden" id="hdnCollectionID" />
+        </div>
+        <div class="control-group">
+            <label class="control-label">Collection Item:</label>
+            <div class="controls cLabel" id="cItem"></div>
+            <input type="hidden" id="hdnItemID" />
+        </div>
+        <div class="control-group">
+            <label class="control-label">Status:</label>
+            <div class="controls  cLabel">
+                <select id="cStatus"></select>
+                <input type="hidden" id="hdnStatusID" />
+            </div>
+        </div>
+
+        <div class="control-group" id="statusNoteGroup" style="display:none">
+            <label class="control-label">Borrowed By:</label>
+            <div class="controls cLabel">
+                <input type="text" id="cStatusNote"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Rating:</label>
+            <div class="controls cLabel">
+                <select id="cRating">
+                    <option value="0" disabled="disabled" selected:"selected">Choose Rating</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Review:</label>
+            <div class="controls cLabel">
+                <textarea id="cReview" rows="4" cols="1"></textarea>
+            </div>
+        </div>
+        <div id="alert-area"></div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-success" id="SaveBtn">Save Changes</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#thumbTool").tooltip({
+            placement: 'right',
+            html: true
+        });
+        $("#myModal").modal({
+            show: false
+        });
+
+        PopulateStatusList();
+
+        $("#SaveBtn").click(function () {
+
+            var collectionID = $('#hdnCollectionID').val();
+            var itemID = $('#hdnItemID').val();
+            var cStatus = $('#cStatus option:selected').val();
+            var cStatusText = $('#cStatus option:selected').text();
+            var cStatusNote = $("#cStatusNote").val();
+            $("#hdnStatusID").val(cStatus);
+            var cRating = $("#cRating option:selected").val();
+            var cReview = $("#cReview").val();
+
+            $.ajax({
+                url: "/Collection/EditCollectionItem",
+                data: { collectionID: collectionID, itemID: itemID, statusID: cStatus, statusNote: cStatusNote, rating: cRating, review: cReview },
+                success: function (result) {
+                    if (result == "success") {
+                        var columns = document.getElementById(itemID);
+
+                        if (cStatusText == "Borrowed" && cStatusNote != "") {
+                            $(columns.cells[1]).text(cStatusText + " by " + cStatusNote);
+                        }
+                        else {
+                            $(columns.cells[1]).text(cStatusText);
+                        }
+
+                        if (cRating == "0") {
+                            $(columns.cells[2]).text("")
+                        }
+                        else { $(columns.cells[2]).text(cRating + "/5") }
+
+                        $(columns.cells[3]).text(cReview);
+                        $("#myModal").modal('hide');
+
+                    }
+                    else {
+                        newAlert('alert-error', "Error: " + result);
+                    }
+                }
+            }); // End of Ajax
+        }); // End of SaveBtn click
+    });                   // End of document.ready
+
+    function EditModal(collectionID, itemID, statusID) {
+        $("#cStatus").trigger('change');
+
+        var columns = document.getElementById(itemID);
+        $('#hdnCollectionID').val(collectionID);
+        $('#hdnItemID').val(itemID);
+        if ($('#hdnStatusID').val() == "") {
+            $('#hdnStatusID').val(statusID);
+        }
+        var statID = $('#hdnStatusID').val();
+
+        $('#cName').text($.trim($("#hdnCollectionName").val()));
+        $('#cItem').text($(columns.cells[0]).text());
+
+        //Split 'by' second half becomes status note
+        if (statID == "BRW") {
+            var column = $(columns.cells[1]).text();
+            var status = column.split(" by ");
+            $('#cStatus option[value="' + status[0] + '"]').attr("selected", "selected"); //Select item with id
+            $('#cStatusNote').val($.trim(status[1]));
+        }
+        else {
+            $('#cStatus option[value="' + statID + '"]').attr("selected","selected"); //Select item with id
+            $('#cStatusNote').val("");
+        }
+
+        var rating = $(columns.cells[2]).text(); 
+        if (rating == "") {
+            rating = "0";
+        }
+        else
+        {
+            ratingArray = rating.split('/');
+            rating = ratingArray[0];
+        }
+        $('#cRating option[value="' + $.trim(rating) + '"]').attr("selected", "selected");
+
+        $('#cReview').text($(columns.cells[3]).text());
+
+        $('#myModal').modal('show');
+    }
+
+    function PopulateStatusList() {
+        $.ajax({
+            url: "/Collection/PopulateStatusList",
+            success: function (result) {
+                var status = $.parseJSON(result);
+                $("#cStatus").html("");
+                for (var s in status) {
+                    $("#cStatus").append("<option value='" + s +"'>" + status[s] + "</option>");
+                }
+            }
+        });
+
+        $("#cStatus").change(function () {
+            if ($("#cStatus option:selected").val() == "BRW") {
+                $("#statusNoteGroup").show();
+            }
+            else
+                $("#statusNoteGroup").hide();
+        });
+    }
+    /*function CreatePopover(id, src) {
+        var img = "<img src='" + src + "' alt='' />";
+        $("#" + id).popover({
+            content: img,
+            trigger: 'hover'
+        });
+    }*/
+</script>
+

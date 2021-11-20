@@ -1,0 +1,30 @@
+﻿@model CollectorzCorner.Models.ContactusModel
+
+@{
+    ViewBag.Title = "Collectorz Corner";
+}
+
+<h2 class="heading">Contact Us</h2>
+
+@using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+        <div class="control-group">
+            <label class="control-label">Email:</label>
+            <div class="controls"> 
+                @Html.TextBoxFor(model => model.Email,new{style="width:205px", placeholder="someone@example.com"})
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Comments:</label>
+            <div class="controls">
+                @Html.TextAreaFor(model => model.Comments)
+                @Html.ValidationMessageFor(model => model.Comments)
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls"><input type="submit" value="Send" class="btn btn-primary"/></div>
+        </div>
+}
+

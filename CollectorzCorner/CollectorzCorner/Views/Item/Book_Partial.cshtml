@@ -1,0 +1,57 @@
+﻿@model CollectorzCorner.Book
+
+<div class="control-group">
+    <label class="control-label">Author:</label>
+    <div class="controls cLabel">
+        @Html.DisplayFor(model => model.Author)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Illustrator:</label>
+    <div class="controls cLabel">
+        @Html.DisplayFor(model => model.Illustrator)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Editor:</label>
+    <div class="controls cLabel">
+        @Html.DisplayFor(model => model.Editor)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Plot:</label>
+    <div class="controls cLabel span4">
+        @Html.DisplayFor(model => model.Plot)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Number of Pages:</label>
+    <div class="controls cLabel">
+        @Html.DisplayFor(model => model.NoOfPages)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Reading Level:</label>
+    <div class="controls cLabel">
+        @Html.DisplayFor(model => model.ReadLevel)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">ISBN:</label>
+    <div class="controls cLabel">
+        @Html.DisplayFor(model => model.ISBN)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">E-Book:</label>
+    <div class="controls checkbox cLabel" style="cursor:default">
+        <input type="checkbox" disabled="disabled" value="@Model.IsEBook" style="cursor:default" /> Yes
+    </div>
+</div>

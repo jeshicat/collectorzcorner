@@ -1,0 +1,232 @@
+﻿@model CollectorzCorner.Models.ItemModel
+
+@{
+    ViewBag.Title = "Collectorz Corner";
+}
+
+<div id="alert-area"></div>
+
+@{ 
+    var url = (string)ViewData["PreviousURL"];
+    if(User.Identity.IsAuthenticated){
+        if(url.Contains("Collection")){
+            <p>
+                <a href="@url" class="btn btn-primary" style="color:white;text-decoration:none;">Back to My Collection</a>
+                <input type="button" onclick="AddItemModal()" class="btn btn-success" value="Collect Item" />
+            </p>
+        }
+        else
+        {
+            <p>
+                @Html.ActionLink("Back to Search", "Index", "Search", new { }, new { @class = "btn btn-primary", style = "color:white;text-decoration:none;" })
+                <input type="button" onclick="AddItemModal()" class="btn btn-success" value="Collect Item" />
+            </p>
+        }
+    }
+}
+<div class="form-horizontal">
+
+<div class="control-group">
+    <div class="controls" style="margin-left:75px">
+        <h3>@Model.Item.Title</h3>
+        <br />
+        <div id="imgSection">
+            @if (Model.Item.PictureID != null)
+            {
+                @:<img src="@Url.Action("DisplayThumbImage", "Search", new { id = Model.Item.PictureID, width = 200, height = 200 })" alt="" />
+            }
+            @*<a href="" id="thumbTool" style="display: inline-block;" title='<img src="@Url.Action("DisplayImage","Search",new { id = Model.Item.PictureID })" alt=""/>'>
+                <img src="@Url.Action("DisplayThumbImage","Search",new { id = Model.Item.PictureID, width=100, height=100})" alt="" />
+            </a>*@
+        </div>
+        @*FIX THIS ERROR HERE*@
+    </div>
+</div>
+<div class="control-group">
+  @{ 
+      if (Model.Item.SeriesID != null)
+      {
+        <text>
+        <label class="control-label">Series:</label>
+        <div class="controls cLabel">@Html.Action("GetSeriesName", "Item", new { seriesId = Model.Item.SeriesID })</div>
+        </text>
+      }
+  }
+</div>
+
+<div class="control-group">
+    <label class="control-label">Item Type:</label>
+    <div class="controls cLabel">
+        @Html.Action("GetTypeName", "Item", new { typeId = Model.Item.TypeID })
+        <input type="hidden" id="ItemID" value="@Model.Item.ID" />
+        <input type="hidden" id="TypeID" value="@Model.Item.TypeID" />
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Description:</label>
+    <div class="controls span4 cLabel" style="margin-left:17px">
+        @Model.Item.Description
+    </div>
+</div>
+
+<div class="control-group">
+    @if (Model.Item.TypeID == "MOV" || Model.Item.TypeID == "GAM")
+    {
+        @:<label class="control-label">Studio:</label>
+    }
+    else
+    {
+        @:<label class="control-label">Publisher:</label>
+    }
+    <div class="controls cLabel">
+        @Model.Item.Publisher
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Release Date:</label>
+    <div class="controls cLabel">
+        @if (Model.Item.ReleaseDate != null)
+        {
+            @:@Model.Item.ReleaseDate.Value.ToString("MMMM dd, yyyy")
+        }
+    </div>
+</div>
+
+<div id="DynamicContent"></div>
+
+<div class="control-group">
+    <label class="control-label">Genres:</label>
+    <div class="controls cLabel">
+        <div id="genreList"></div>
+    </div>
+</div>
+</div>
+
+<div id="myModal" class="modal" style="display:none">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h3>Collect this Item!</h3>
+    </div>
+    <div class="modal-body form-horizontal">
+        <p class="well">Select the collection you would like to add this item to.</p>
+        
+        <div class="control-group">
+            <label class="control-label">Choose Collection:</label>
+            <div class="controls">
+                <select id="collections"></select>
+            </div>
+        </div>
+        <div class="control-group" id="collectionForm" style="display:none">
+            <label class="control-label">Collection Name:</label>
+            <div class="controls">
+                <input type="text" id="collectionName"/>
+                <div id="errorMsg" style="display:none;color:Red;">Collection name is required.</div>
+                @*TODO: Add fields like isPublic and description later on?*@
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button class="btn btn-success" id="AddItemBtn">Collect Item</button>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var itemID = $("#ItemID").val();
+    var typeID = $("#TypeID").val();
+    $(document).ready(function () {
+
+        $("#thumbTool").tooltip({
+            placement:'right',
+            html:true
+        });
+        $("#myModal").modal({
+            show: false
+        });
+
+        itemID = $("#ItemID").val();
+        typeID = $("#TypeID").val();
+
+        $.ajax({
+            url: "/Item/GetItemGenres",
+            data: { ItemID: itemID },
+            success: function (result) {
+                var genres = $.parseJSON(result);
+                var genreList = "";
+                for (var g in genres) {
+                    if (genreList == "")
+                        genreList = genres[g];
+                    else
+                        genreList += ", " + genres[g];
+                    $("#genreList").html(genreList);
+                }
+            }
+        });
+
+        $.ajax({
+            url: "/Item/SendItemPartial",
+            data: { ItemID: itemID, TypeID: typeID },
+            success: function (result) {
+                $("#DynamicContent").html(result);
+            }
+        });
+
+        $("#AddItemBtn").click(function () {
+            var collectionID = $("#collections option:selected").val();
+            var collectionName = $("#collectionName").val();
+
+            if (collectionName != "" || collectionID >= 0) {
+                $.ajax({
+                    url: "/Item/AddItemToCollection",
+                    data: { ItemID: itemID, CollectionID: collectionID, CollectionName: collectionName, TypeID: typeID },
+                    success: function (result) {
+                        $("#myModal").modal('hide');
+                        newAlert("success", result);
+
+                    }
+                });
+            }
+            else {
+                $("#errorMsg").show();
+            }
+        });
+
+        $("#collections").change(function () {
+            if ($("#collections option:selected").val() == "-1") {
+
+                $("#collectionForm").show();
+            }
+            else {
+                $("#collectionForm").hide();
+            }
+        });
+    });
+
+    function AddItemModal() {
+        $.ajax({
+            url: "/Item/GetUserCollectionsByType",
+            data: { TypeID: typeID },
+            success: function (result) {
+                var collections = $.parseJSON(result);
+                $("#collections").html("");
+                for (var collection in collections) {
+                    $("#collections").append("<option value=" + collection + ">" + collections[collection] + "</option>");
+                }
+                $('#collections').append("<option value='-1'>Add new collection</option>");
+                $("#collections").change();
+            }
+        });
+
+        $('#myModal').modal('show');
+    }
+
+    function newAlert(type, message) {
+        $("#alert-area").html("<button type='button' class='close' data-dismiss='alert'>x</button>");
+        $("#alert-area").append($("<div class='alert-message" + type + " fade in' data-alert><p> " + message + " </p></div>"));
+        $("#alert-area").addClass("alert");
+        //$(".alert-message").delay(2000).fadeOut("slow", function () { $(this).remove(); });
+    }
+</script>
